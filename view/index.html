@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self' petasset://local/core/ 'wasm-unsafe-eval'; connect-src petasset://local; style-src 'self'; media-src petasset://local/sound/; img-src 'self' petasset://local; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>阿洛娜桌宠</title>
+    <link rel="stylesheet" href="./pet.css" />
+    <script defer src="./pet.js"></script>
+  </head>
+  <body>
+    <article id="bubble" aria-live="polite" aria-atomic="true" hidden>
+      <div id="bubble-text"></div>
+      <button id="read-reply" type="button" hidden>查看全文 <span aria-hidden="true">›</span></button>
+    </article>
+    <main id="stage">
+      <canvas id="pet" role="button" aria-haspopup="menu" tabindex="0" aria-label="捏捏阿洛娜"></canvas>
+      <div id="model-status" role="status">
+        <span id="model-message">正在加载阿洛娜…</span><button id="retry" hidden>重试</button>
+      </div>
+    </main>
+    <footer>
+      <form id="chat" autocomplete="off">
+        <input
+          id="message"
+          maxlength="4000"
+          type="text"
+          aria-label="给阿洛娜的消息"
+          placeholder="和阿洛娜说点什么…"
+          enterkeyhint="send"
+        />
+        <button id="send" type="submit" disabled>发送</button>
+      </form>
+    </footer>
+  </body>
+</html>

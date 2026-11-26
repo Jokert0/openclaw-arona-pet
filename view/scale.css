@@ -1,0 +1,41 @@
+body {
+  margin: 14px 20px;
+  background: #f4faff;
+  color: #214e71;
+  font: 14px/1.5 "Microsoft YaHei UI", system-ui, sans-serif;
+}
+label, .limits {
+  display: flex;
+  justify-content: space-between;
+}
+label { font-weight: 600; }
+output { font-variant-numeric: tabular-nums; }
+input[type="range"] {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 22px;
+  margin: 8px 0 3px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9px;
+  background: #afd4e9;
+}
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: #287caa;
+  box-shadow: 0 0 0 1px #5798ba;
+}
+input[type="range"]:focus-visible { outline: none; }
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px #26709b, 0 0 0 5px #d5ebf8;
+}
+.limits { font-size: 12px; color: #526a78; }

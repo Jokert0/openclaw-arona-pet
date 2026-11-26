@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'" />
+    <title>桌宠大小</title>
+    <link rel="stylesheet" href="./scale.css" />
+  </head>
+  <body>
+    <label for="scale">缩放比例 <output id="percent" for="scale"></output></label>
+    <input id="scale" type="range" min="10" max="150" step="1" disabled />
+    <div class="limits" aria-hidden="true"><span>10%</span><span>150%</span></div>
+  </body>
+</html>

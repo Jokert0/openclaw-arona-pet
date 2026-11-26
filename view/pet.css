@@ -1,0 +1,258 @@
+:root {
+  color-scheme: light;
+  font:
+    14px/1.45 "Nunito",
+    "Microsoft YaHei UI",
+    system-ui,
+    sans-serif;
+  color: #193d55;
+  --paper: #f8fcfff5;
+  --edge: #accad8;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+body {
+  position: relative;
+  --ui-scale: calc(100vw / 420px);
+}
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:focus-visible,
+canvas:focus-visible,
+input:focus-visible {
+  outline: 2px solid #1676a4;
+  outline-offset: 1px;
+}
+form,
+#model-status {
+  background: var(--paper);
+  border: 1px solid var(--edge);
+  box-shadow: 0 2px 6px #10395224;
+}
+body.compact > footer {
+  display: none;
+}
+#bubble {
+  position: absolute;
+  z-index: 1;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+  zoom: var(--ui-scale);
+  width: max-content;
+  min-width: min(210px, 92%);
+  max-width: min(378px, 92%);
+  margin: 0;
+  padding: 16px 22px 14px;
+  border-radius: 26px;
+  color: #3a4a70;
+  background:
+    radial-gradient(120% 90% at 16% 0%, #fff 0%, #fff0 55%),
+    linear-gradient(145deg, #d9efff 0%, #e7eeff 48%, #ffe6f2 100%);
+  box-shadow:
+    inset 0 1px 0 #ffffffcc,
+    inset 0 -1px 0 #ffffff66,
+    0 8px 20px #5a6eaa2e;
+  animation: bubble-pop 0.36s cubic-bezier(0.22, 1.3, 0.4, 1) both;
+}
+/* A few floating candy dots in the top-right corner. */
+#bubble::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffffb0;
+  box-shadow: -9px 6px 0 -1px #ffffff80, 3px 12px 0 -2.5px #ffffff70;
+  pointer-events: none;
+}
+/* Thought-bubble tail. All three dots sit below the body with a visible gap,
+   then drift down-left toward her head. */
+#bubble::after {
+  content: "";
+  position: absolute;
+  left: 58%;
+  bottom: -24px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, #fff4f9, #ffd0e5 68%, #ffc4de);
+  box-shadow:
+    0 0 0 1px #ffffffb8,
+    -15px 16px 0 -3px #ffd9ec,
+    -15px 16px 0 -2px #ffffffb8,
+    -29px 29px 0 -5.5px #ffe3f0,
+    -29px 29px 0 -4.5px #ffffffb8;
+  filter: drop-shadow(0 1px 2px #7a6b9126);
+  pointer-events: none;
+}
+#bubble-text {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  max-height: calc(3 * 1.6em);
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 17px;
+  line-height: 1.6;
+  text-wrap: pretty;
+  scrollbar-width: thin;
+  scrollbar-color: #b9c9e8 transparent;
+}
+#bubble-text::-webkit-scrollbar {
+  width: 6px;
+}
+#bubble-text::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: #b9c9e8;
+}
+#bubble-text::-webkit-scrollbar-track {
+  background: transparent;
+}
+#bubble.reply #bubble-text {
+  max-height: calc(4 * 1.6em);
+  overflow: hidden;
+}
+#read-reply {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin: 7px -8px -4px auto;
+  padding: 3px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffffa8;
+  color: #4b6491;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: inset 0 0 0 1px #ffffff88;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+#read-reply span {
+  display: inline-block;
+  animation: arrow-nudge 1.6s ease-in-out infinite;
+}
+#read-reply:hover {
+  background: #ffffffd0;
+  transform: translateY(-1px);
+}
+#read-reply:active {
+  transform: translateY(0) scale(0.97);
+}
+@keyframes bubble-pop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px) scale(0.82);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+@keyframes arrow-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #bubble,
+  #read-reply span {
+    animation: none;
+  }
+}
+#stage {
+  position: absolute;
+  inset: 7% 1.9% 8.5%;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 10px;
+  cursor: grab;
+  touch-action: none;
+}
+canvas:active {
+  cursor: grabbing;
+}
+#model-status {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: 90%;
+  padding: 9px 13px;
+  border-radius: 10px;
+  text-align: center;
+}
+#retry {
+  margin: 5px;
+  border: 0;
+  border-radius: 5px;
+  background: #dcf1ff;
+}
+footer {
+  position: absolute;
+  inset: auto 8px 6px;
+  zoom: var(--ui-scale);
+  display: grid;
+  gap: 4px;
+}
+form {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+}
+input {
+  min-width: 0;
+  flex: 1;
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  padding: 5px 6px;
+}
+#send {
+  padding: 5px 10px;
+  background: #236782;
+  color: white;
+  font-weight: 600;
+  border: 0;
+  border-radius: 10px;
+}
+#send:disabled {
+  cursor: default;
+  background: #dbe8ed;
+  color: #586a75;
+}

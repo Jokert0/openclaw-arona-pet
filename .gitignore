@@ -1,0 +1,8 @@
+node_modules/
+.runtime/
+.idea/
+/assets/*
+!/assets/README.md
+/gateway.json
+/pet-settings.json
+/pet-settings.json.tmp

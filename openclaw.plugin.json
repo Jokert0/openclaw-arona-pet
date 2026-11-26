@@ -1,0 +1,7 @@
+{
+  "id": "openclaw-arona-pet", "name": "阿洛娜桌宠",
+  "description": "在 Windows 桌面陪伴你并显示活动会话的可见思考。",
+  "cliCommands": [{"name":"pet","description":"启动阿洛娜桌宠","hasSubcommands":true}],
+  "activation": {"onStartup":false,"onCommands":["pet"]},
+  "configSchema": {"type":"object","properties":{},"additionalProperties":false}
+}
